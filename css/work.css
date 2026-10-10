@@ -1,0 +1,976 @@
+/* =========================================================
+   STUDIO 41 — WORK PAGE
+   ========================================================= */
+
+/* ---------- Butler Fonts ---------- */
+
+@font-face {
+    font-family: "Butler";
+    src: url("/fonts/Butler-Free-Lgt.woff2") format("woff2");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Butler";
+    src: url("/fonts/Butler-Free-Rmn.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Butler";
+    src: url("/fonts/Butler-Free-Med.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Butler";
+    src: url("/fonts/Butler-Free-SBd.woff2") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Butler";
+    src: url("/fonts/Butler-Free-Bd.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Butler";
+    src: url("/fonts/Butler-Free-XBd.woff2") format("woff2");
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Butler";
+    src: url("/fonts/Butler-Free-Blk.woff2") format("woff2");
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+/* =========================================================
+   ROOT
+   ========================================================= */
+
+:root {
+    --site-background: #F4F0E8;
+    --red: #EB0043;
+    --black: #111113;
+    --white: #FFFFFF;
+
+    --page-padding: 6vw;
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--site-background);
+    color: var(--black);
+    font-family: "Poppins", sans-serif;
+    overflow-x: hidden;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font: inherit;
+}
+
+
+/* =========================================
+   HEADER / NAVBAR (Smart Sticky - Smooth)
+========================================= */
+
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    width: 100%;
+    height: 100px;
+
+    /* Base transform */
+    transform: translate3d(-50%, var(--header-y, 0%), 0);
+
+    /* 
+     * 0.65s duration paired with an expressive cubic-bezier:
+     * Starts with calm momentum and gently settles to a soft stop
+     */
+    transition:
+        transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.4s ease;
+
+    padding: 0 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: #F4F0E8;
+    box-shadow: rgba(0, 0, 0, 0.08) 0px 4px 12px;
+    z-index: 100;
+    will-change: transform;
+}
+
+/* Hidden state: tucks away cleanly */
+.site-header.is-hidden {
+    --header-y: -100%;
+    /* Optional slight speed-up on exit so it gets out of the way smoothly */
+    transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.site-header.is-scrolled {
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 8px 24px;
+}
+
+
+/* ---------- Logo ---------- */
+
+.logo {
+    display: block;
+
+    width: 80px;
+
+    line-height: 0;
+}
+
+.logo img {
+    display: block;
+
+    width: 100%;
+    height: auto;
+}
+
+
+/* ---------- Navigation ---------- */
+
+.main-nav {
+    display: flex;
+    align-items: center;
+
+    gap: 32px;
+}
+
+.main-nav a {
+    position: relative;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1;
+    color: #111113;
+    transition: color 0.3s ease;
+}
+
+.main-nav a:not(.talk-button)::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -7px;
+    width: 100%;
+    height: 2px;
+    background: #EB0043;
+    border-radius: 999px;
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 0.35s ease;
+}
+
+.main-nav a:not(.talk-button):hover {
+    color: #EB0043;
+}
+
+.main-nav a:not(.talk-button):hover::after {
+    transform: scaleX(1);
+}
+
+/* ---------- Let's Talk Button ---------- */
+
+.talk-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 42px;
+    padding: 0 22px;
+
+    border-radius: 999px;
+
+    background: #EB0043;
+    color: #FFFFFF !important;
+
+    transition:
+        transform 0.45s ease,
+        opacity 0.45s ease;
+}
+
+.talk-button:hover {
+    background: #111113;
+    transform: scale(1.02);
+}
+
+
+/* =========================================================
+   WORK INTRO
+   ========================================================= */
+
+.work-intro {
+    padding: 190px var(--page-padding) 70px;
+}
+
+.work-intro-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.work-intro h1 {
+    font-family: "Butler", serif;
+    font-size: clamp(80px, 12vw, 150px);
+    font-weight: 500;
+    line-height: 0.85;
+    letter-spacing: -0.055em;
+}
+
+.work-intro p {
+    margin-top: 35px;
+
+    max-width: 600px;
+
+    font-size: 17px;
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+.work-intro span {
+    color: #EB0043;
+}
+
+
+/* =========================================================
+   FILTERS
+   ========================================================= */
+
+.work-filter-section {
+    padding: 30px var(--page-padding) 80px;
+}
+
+.work-filters {
+    max-width: 1400px;
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    flex-wrap: wrap;
+}
+
+.filter-button {
+    border: 1px solid rgba(17, 17, 19, 0.35);
+
+    background: transparent;
+    color: var(--black);
+
+    padding: 11px 22px;
+
+    border-radius: 999px;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition:
+        background 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease,
+        transform 0.3s ease;
+}
+
+.filter-button:hover {
+    border-color: var(--black);
+    transform: translateY(-2px);
+}
+
+.filter-button.active {
+    background: var(--black);
+    color: var(--site-background);
+    border-color: var(--black);
+}
+
+
+/* =========================================================
+   PROJECT SECTION
+   ========================================================= */
+
+.projects-section {
+    padding: 0 var(--page-padding) 160px;
+}
+
+/* =========================================
+   PROJECT GRID (12-Column Flexible Grid)
+========================================= */
+
+.projects-grid {
+    max-width: 1400px;
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 25px;
+    row-gap: 30px;
+
+    align-items: start;
+}
+
+/* Base card */
+.project-card {
+    min-width: 0;
+    width: 100%;
+}
+
+.project-link {
+    display: block;
+    width: 100%;
+}
+
+/* =========================================
+   DYNAMIC PROJECT LAYOUT
+========================================= */
+
+/* Row 1 Left: Wide (~61% width) */
+.project-card.pattern-rect-left {
+    grid-column: span 7;
+}
+
+/* Row 1 Right: Square (~39% width) */
+.project-card.pattern-sq-right {
+    grid-column: span 5;
+}
+
+/* Row 2 Left: Square (~39% width) */
+.project-card.pattern-sq-left {
+    grid-column: span 5;
+}
+
+/* Row 2 Right: Wide (~61% width) */
+.project-card.pattern-rect-right {
+    grid-column: span 7;
+}
+
+/* =========================================
+   UNIFIED FIXED HEIGHT FOR BOTH
+   Both rectangle and square get the EXACT SAME height!
+========================================= */
+
+.project-image-wrap {
+    position: relative;
+    width: 100%;
+    /* Set equal responsive height for every card */
+    height: clamp(380px, 36vw, 540px);
+
+    overflow: hidden;
+    background: #dedad2;
+    border-radius: 18px;
+
+    box-shadow:
+        0 10px 30px rgba(17, 17, 19, 0.08),
+        0 2px 8px rgba(17, 17, 19, 0.05);
+
+    transition:
+        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Ensure the image fills the container without distortion */
+.project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-link:hover .project-image {
+    transform: scale(1.035);
+}
+
+.project-link:hover .project-image-wrap {
+    transform: translateY(-4px);
+    box-shadow:
+        0 18px 45px rgba(17, 17, 19, 0.12),
+        0 4px 12px rgba(17, 17, 19, 0.06);
+}
+
+
+/* =========================================================
+   PROJECT CARD
+   ========================================================= */
+
+.project-card {
+    min-width: 0;
+}
+
+.project-link {
+    display: block;
+}
+
+.project-image-wrap {
+    position: relative;
+
+    width: 100%;
+    height: clamp(280px, 34vw, 520px);
+
+    overflow: hidden;
+
+    background: #dedad2;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 10px 30px rgba(17, 17, 19, 0.08),
+        0 2px 8px rgba(17, 17, 19, 0.05);
+
+    transition:
+        transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-link:hover .project-image-wrap {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 18px 45px rgba(17, 17, 19, 0.12),
+        0 4px 12px rgba(17, 17, 19, 0.06);
+}
+
+.project-rectangle {
+    grid-column: span 1;
+}
+
+.project-square {
+    grid-column: span 1;
+}
+
+
+/* =========================================================
+   PROJECT IMAGE
+   ========================================================= */
+
+.project-image {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-link:hover .project-image {
+    transform: scale(1.035);
+}
+
+
+/* =========================================================
+   PROJECT HOVER ARROW
+   ========================================================= */
+
+.project-arrow {
+    flex-shrink: 0;
+
+    width: 68px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-top: 3px;
+
+    background: var(--red);
+    color: var(--white);
+
+    border-radius: 999px;
+
+    font-family: Arial, sans-serif;
+    font-size: 23px;
+    font-weight: 400;
+    line-height: 1;
+
+    opacity: 0;
+
+    transform: translateX(-8px);
+
+    transition:
+        opacity 0.3s ease,
+        transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-link:hover .project-arrow {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+
+/* =========================================================
+   PROJECT INFORMATION
+   ========================================================= */
+
+.project-info {
+    padding-top: 18px;
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+.project-details {
+    min-width: 0;
+}
+
+.project-info h2 {
+    font-family: "Butler", serif;
+
+    font-size: clamp(25px, 2.2vw, 36px);
+    font-weight: 400;
+
+    line-height: 1.05;
+
+    letter-spacing: -0.025em;
+}
+
+.project-info p {
+    margin-top: 7px;
+
+    font-size: 12px;
+    font-weight: 500;
+
+    letter-spacing: 0.01em;
+
+    text-transform: uppercase;
+
+    opacity: 0.65;
+}
+
+
+/* =========================================================
+   FILTERED PROJECTS
+   ========================================================= */
+
+.project-card.is-hidden {
+    display: none;
+}
+
+
+/*
+    When filtering changes the number of visible projects,
+    CSS Grid automatically closes the gaps.
+
+    JS will additionally handle the alternating visual
+    order so the gallery doesn't become awkward.
+*/
+
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+
+.site-footer {
+    position: relative;
+    width: 100%;
+
+    /* Consolidated horizontal padding here (30px + 50px = 80px) */
+    padding: 80px 80px 40px;
+
+    background: #111113;
+    color: #F4F0E8;
+}
+
+.footer-main {
+    display: flex;
+    justify-content: space-between;
+
+    width: 100%;
+    margin: 0 auto;
+
+    /* Removed side padding so it aligns with the footer container */
+    padding-bottom: 90px;
+}
+
+.footer-brand {
+    max-width: 360px;
+}
+
+.footer-logo {
+    display: inline-block;
+}
+
+.footer-logo img {
+    display: block;
+    width: 200px;
+    height: auto;
+}
+
+.footer-brand p {
+    max-width: 320px;
+    margin: 30px 0 0;
+
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.7;
+
+    color: #FFFFFF;
+}
+
+.footer-links {
+    display: flex;
+    gap: 120px;
+}
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 13px;
+}
+
+.footer-label {
+    margin-bottom: 12px;
+
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+
+    color: #EB0043;
+}
+
+.footer-column a {
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+
+    color: #F4F0E8;
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+.footer-column a:hover {
+    color: #EB0043;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+
+    width: 100%;
+    margin: 0 auto;
+
+    /* Border starts and ends exactly where the content starts and ends */
+    border-top: 1px solid rgba(244, 240, 232, 0.2);
+
+    padding-top: 25px;
+
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    :root {
+        --page-padding: 5vw;
+    }
+
+    .site-header {
+        height: 80px;
+        padding: 0 30px;
+    }
+
+    .site-logo img {
+        width: 68px;
+    }
+
+    .main-nav {
+        gap: 20px;
+    }
+
+    .main-nav a {
+        font-size: 12px;
+    }
+
+    .header-cta {
+        min-width: 100px;
+        height: 38px;
+
+        padding: 0 18px;
+
+        font-size: 12px;
+    }
+
+
+    .work-intro {
+        padding-top: 150px;
+        padding-bottom: 60px;
+    }
+
+    .work-intro h1 {
+        font-size: clamp(70px, 13vw, 120px);
+    }
+
+
+    .projects-grid {
+        column-gap: 24px;
+        row-gap: 60px;
+    }
+
+    .project-image-wrap {
+        height: clamp(240px, 35vw, 400px);
+    }
+
+
+    .footer-top {
+        padding-bottom: 80px;
+    }
+
+    .footer-links {
+        gap: 60px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    :root {
+        --page-padding: 20px;
+    }
+
+
+    /* Header */
+
+    .site-header {
+        height: 72px;
+
+        padding: 0 20px;
+    }
+
+    .site-logo img {
+        width: 58px;
+    }
+
+    .main-nav {
+        display: none;
+    }
+
+    .header-cta {
+        min-width: auto;
+        height: 36px;
+
+        padding: 0 17px;
+
+        font-size: 11px;
+    }
+
+
+    /* Intro */
+
+    .work-intro {
+        padding-top: 125px;
+        padding-bottom: 45px;
+    }
+
+    .work-intro h1 {
+        font-size: clamp(58px, 18vw, 100px);
+        line-height: 0.88;
+    }
+
+    .work-intro p {
+        margin-top: 25px;
+
+        max-width: 330px;
+
+        font-size: 14px;
+        line-height: 1.5;
+    }
+
+
+    /* Filters */
+
+    .work-filter-section {
+        padding-top: 10px;
+        padding-bottom: 55px;
+    }
+
+    .work-filters {
+        gap: 7px;
+    }
+
+    .filter-button {
+        padding: 9px 15px;
+
+        font-size: 11px;
+    }
+
+
+    /* Projects */
+
+    .projects-section {
+        padding-bottom: 100px;
+    }
+
+    .projects-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 50px;
+    }
+
+    .project-card.pattern-rect-left,
+    .project-card.pattern-sq-right,
+    .project-card.pattern-sq-left,
+    .project-card.pattern-rect-right {
+        grid-column: auto;
+        width: 100%;
+    }
+
+    .project-card.pattern-rect-left .project-image-wrap,
+    .project-card.pattern-rect-right .project-image-wrap,
+    .project-card.pattern-sq-right .project-image-wrap,
+    .project-card.pattern-sq-left .project-image-wrap {
+        aspect-ratio: 4 / 3;
+        height: auto;
+    }
+
+    .project-card {
+        width: 100%;
+    }
+
+    .project-image-wrap {
+        height: 72vw;
+        max-height: 450px;
+    }
+
+    .project-info {
+        padding-top: 14px;
+    }
+
+    .project-info h2 {
+        font-size: 27px;
+    }
+
+    .project-info p {
+        margin-top: 6px;
+        font-size: 10px;
+    }
+
+    /*
+        No hover arrow on touch-sized layouts.
+    */
+
+    .project-arrow {
+        display: none;
+    }
+
+
+    /* Footer */
+
+    .site-footer {
+        padding-top: 70px;
+        padding-bottom: 25px;
+    }
+
+    .footer-top {
+        flex-direction: column;
+
+        gap: 60px;
+
+        padding-bottom: 70px;
+    }
+
+    .footer-logo img {
+        width: 75px;
+    }
+
+    .footer-links {
+        width: 100%;
+
+        justify-content: space-between;
+
+        gap: 30px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+
+        gap: 8px;
+
+        line-height: 1.5;
+    }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
