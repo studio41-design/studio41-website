@@ -10,11 +10,11 @@
     <meta name="description" content="Have a project, an idea, or something worth making? Get in touch with Studio 41.">
 
     <!-- Favicons -->
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/logos/Studio41-favicon-16.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/logos/Studio41-favicon-32.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/logos/Studio41-favicon-180.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/logos/Studio41-favicon-16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/logos/Studio41-favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/logos/Studio41-favicon-180.png">
 
-    <link rel="stylesheet" href="css/launch-contact.css">
+    <link rel="stylesheet" href="/css/launch-contact.css">
 </head>
 
 <div class="page-transition" aria-hidden="true"></div>
@@ -26,11 +26,11 @@
         <!-- HEADER -->
         <header class="launch-contact-header">
 
-            <a href="launch.html" class="contact-logo" aria-label="Back to Studio 41 launch page">
+            <a href="/" class="contact-logo" aria-label="Back to Studio 41 launch page">
                 <img src="assets/logos/Studio41-logo-black.svg" alt="Studio 41">
             </a>
 
-            <a href="launch.html" class="back-to-launch">
+            <a href="/" class="back-to-launch">
                 <span aria-hidden="true">←</span>
                 <span>Back to launch</span>
             </a>
@@ -295,53 +295,57 @@
     </main>
 
 
-    <!-- Reuse existing interactions -->
-    <script src="js/contact.js"></script>
+    <script src="/js/contact.js"></script>
 
 
     <script>
-        // Fade in the current page after it loads
-        window.addEventListener('pageshow', () => {
-            document.body.classList.remove('page-leaving');
-            document.body.classList.add('page-entering');
+    // Fade in the current page after it loads
+    window.addEventListener('pageshow', () => {
+        document.body.classList.remove('page-leaving');
+        document.body.classList.add('page-entering');
+    });
+
+    document.querySelectorAll('a[href]').forEach(link => {
+        link.addEventListener('click', event => {
+            const url = new URL(link.href, window.location.href);
+
+            const isLaunchPage =
+                window.location.pathname === '/' ||
+                window.location.pathname.endsWith('/index.html');
+
+            const isContactPage =
+                window.location.pathname === '/contact/' ||
+                window.location.pathname === '/contact';
+
+            const isDestination =
+                url.pathname === '/' ||
+                url.pathname === '/contact/' ||
+                url.pathname === '/contact';
+
+            if (
+                !(isLaunchPage || isContactPage) ||
+                !isDestination ||
+                url.origin !== window.location.origin ||
+                url.pathname === window.location.pathname ||
+                link.target === '_blank' ||
+                event.ctrlKey ||
+                event.metaKey ||
+                event.shiftKey ||
+                event.altKey
+            ) {
+                return;
+            }
+
+            event.preventDefault();
+            document.body.classList.remove('page-entering');
+            document.body.classList.add('page-leaving');
+
+            setTimeout(() => {
+                window.location.href = url.href;
+            }, 450);
         });
-
-        document.querySelectorAll('a[href]').forEach(link => {
-            link.addEventListener('click', event => {
-                const url = new URL(link.href, window.location.href);
-
-                const isLaunchPage =
-                    window.location.pathname.endsWith('/launch.html') ||
-                    window.location.pathname.endsWith('/launch-contact.html');
-
-                const isDestination =
-                    url.pathname.endsWith('/launch.html') ||
-                    url.pathname.endsWith('/launch-contact.html');
-
-                if (
-                    !isLaunchPage ||
-                    !isDestination ||
-                    url.origin !== window.location.origin ||
-                    url.pathname === window.location.pathname ||
-                    link.target === '_blank' ||
-                    event.ctrlKey ||
-                    event.metaKey ||
-                    event.shiftKey ||
-                    event.altKey
-                ) {
-                    return;
-                }
-
-                event.preventDefault();
-                document.body.classList.remove('page-entering');
-                document.body.classList.add('page-leaving');
-
-                setTimeout(() => {
-                    window.location.href = url.href;
-                }, 50);
-            });
-        });
-    </script>
+    });
+</script>
 
 
 </body>
