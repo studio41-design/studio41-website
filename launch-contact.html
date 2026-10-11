@@ -26,11 +26,11 @@
         <!-- HEADER -->
         <header class="launch-contact-header">
 
-            <a href="launch.html" class="contact-logo" aria-label="Back to Studio 41 launch page">
+            <a href="index.html" class="contact-logo" aria-label="Back to Studio 41 launch page">
                 <img src="assets/logos/Studio41-logo-black.svg" alt="Studio 41">
             </a>
 
-            <a href="launch.html" class="back-to-launch">
+            <a href="index.html" class="back-to-launch">
                 <span aria-hidden="true">←</span>
                 <span>Back to launch</span>
             </a>
@@ -311,11 +311,11 @@
                 const url = new URL(link.href, window.location.href);
 
                 const isLaunchPage =
-                    window.location.pathname.endsWith('/launch.html') ||
+                    window.location.pathname.endsWith('/index.html') ||
                     window.location.pathname.endsWith('/launch-contact.html');
 
                 const isDestination =
-                    url.pathname.endsWith('/launch.html') ||
+                    url.pathname.endsWith('/index.html') ||
                     url.pathname.endsWith('/launch-contact.html');
 
                 if (
